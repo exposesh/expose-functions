@@ -9,7 +9,7 @@ const {
 } = require("./fetchGitHubSSHKeys");
 const logger = require("firebase-functions/logger");
 
-exports.verifyGitHubUserFetchSSHKeys = async (req, res) => {
+exports.verifyGitHubUserAndFetchSSHKeys = async (req, res) => {
   const username = req.query.username;
 
   try {
