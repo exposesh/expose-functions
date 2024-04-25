@@ -14,6 +14,10 @@ module.exports = {
     "no-restricted-globals": ["error", "name", "length"],
     "prefer-arrow-callback": "error",
     "quotes": ["error", "double", {"allowTemplateLiterals": true}],
+    "max-len": ["error", {
+      "code": 200,
+    }],
+    "camelcase": ["error", {"allow": ["starred_at"]}],
   },
   overrides: [
     {
