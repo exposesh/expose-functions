@@ -1,3 +1,6 @@
+const {
+  verifyToken,
+} = require("./src/verifyToken");
 const admin = require("firebase-admin");
 const {
   onRequest,
@@ -7,6 +10,7 @@ admin.initializeApp();
 
 const handleGitHubStarsWebhookFunction = require("./src/handleGitHubStarsWebhook.js");
 const handleGitHubSponsorsWebhookFunction = require("./src/handleGitHubSponsorsWebhook.js");
+const verifyGitHubUserAndFetchSSHKeysFunction = require("./src/verifyGitHubUserAndFetchSSHKeys.js");
 
 exports.handleGitHubStarsWebhook = onRequest({
   region: "europe-west9",
@@ -19,3 +23,10 @@ exports.handleGitHubSponsorsWebhook = onRequest({
 }, async (req, res) => {
   handleGitHubSponsorsWebhookFunction.handleGitHubSponsorsWebhook(req, res);
 });
+
+exports.verifyGitHubUserAndFetchSSHKeysFunction = onRequest({
+  region: "europe-west9",
+}, verifyToken(async (req, res) => {
+  verifyGitHubUserAndFetchSSHKeysFunction.verifyGitHubUserAndFetchSSHKeys(req, res);
+}));
+
