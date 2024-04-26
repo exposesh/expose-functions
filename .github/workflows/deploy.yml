@@ -1,0 +1,42 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - "main"
+    paths-ignore:
+      - ".gitignore"
+      - "LICENSE"
+      - "README*"
+
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: |
+          cd functions
+          npm install
+
+      - id: "auth"
+        uses: "google-github-actions/auth@v2"
+        with:
+          workload_identity_provider: ${{ secrets.workload_identity_provider }}
+          service_account: ${{ secrets.service_account }}
+          create_credentials_file: true
+
+      - name: Deploy to Firebase
+        run: |
+          cd functions
+          npm run deploy
