@@ -5,12 +5,16 @@ const admin = require("firebase-admin");
 const {
   onRequest,
 } = require("firebase-functions/v2/https");
+const {
+  onSchedule,
+} = require("firebase-functions/v2/scheduler");
 
 admin.initializeApp();
 
 const handleGitHubStarsWebhookFunction = require("./src/handleGitHubStarsWebhook.js");
 const handleGitHubSponsorsWebhookFunction = require("./src/handleGitHubSponsorsWebhook.js");
 const verifyGitHubUserAndFetchSSHKeysFunction = require("./src/verifyGitHubUserAndFetchSSHKeys.js");
+const warmerFunction = require("./src/warmer.js");
 
 exports.handleGitHubStarsWebhook = onRequest({
   region: "europe-west9",
@@ -30,3 +34,9 @@ exports.verifyGitHubUserAndFetchSSHKeysFunction = onRequest({
   verifyGitHubUserAndFetchSSHKeysFunction.verifyGitHubUserAndFetchSSHKeys(req, res);
 }));
 
+exports.warmer = onSchedule({
+  region: "europe-west3",
+  schedule: "* * * * *",
+}, async (event) => {
+  warmerFunction.warmer(event);
+});

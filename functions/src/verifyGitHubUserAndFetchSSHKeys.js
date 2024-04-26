@@ -10,6 +10,11 @@ const {
 const logger = require("firebase-functions/logger");
 
 exports.verifyGitHubUserAndFetchSSHKeys = async (req, res) => {
+  if (req.query.isWarming === "true") {
+    logger.info("Warming request handled successfully");
+    return res.status(200).send("Warming request handled successfully");
+  }
+
   const username = req.query.username;
 
   try {
