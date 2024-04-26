@@ -43,4 +43,5 @@ jobs:
       - name: Deploy to Firebase
         run: |
           cd functions
+          npm install -g firebase-tools
           npm run deploy
