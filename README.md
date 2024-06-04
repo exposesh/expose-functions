@@ -82,22 +82,22 @@ Here is a brief overview of what each function does:
 
 ## More details
 
-### handleGitHubStarsWebhook
+### `handleGitHubStarsWebhook`
 
 This function receives a request containing the webhook event data.    
 It processes this data and performs the necessary actions based on the event type.
 
-### handleGitHubSponsorsWebhook
+### `handleGitHubSponsorsWebhook`
 
 This function works similarly to the `handleGitHubStarsWebhook` function.  
 It processes the webhook events related to GitHub Sponsors.
 
-### verifyGitHubUserAndFetchSSHKeys
+### `verifyGitHubUserAndFetchSSHKeys`
 
 This function verifies a GitHub user and fetches their SSH keys.  
 It uses the `verifyToken` function to authenticate the request.
 
-### warmer
+### `warmer`
 
 This function is scheduled to run every minute.  
 It invokes the other functions to keep them warm and ensure quick response times.
