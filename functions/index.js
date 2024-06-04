@@ -19,24 +19,24 @@ const warmerFunction = require("./src/warmer.js");
 exports.handleGitHubStarsWebhook = onRequest({
   region: "europe-west9",
 }, async (req, res) => {
-  handleGitHubStarsWebhookFunction.handleGitHubStarsWebhook(req, res);
+  await handleGitHubStarsWebhookFunction.handleGitHubStarsWebhook(req, res);
 });
 
 exports.handleGitHubSponsorsWebhook = onRequest({
   region: "europe-west9",
 }, async (req, res) => {
-  handleGitHubSponsorsWebhookFunction.handleGitHubSponsorsWebhook(req, res);
+  await handleGitHubSponsorsWebhookFunction.handleGitHubSponsorsWebhook(req, res);
 });
 
 exports.verifyGitHubUserAndFetchSSHKeysFunction = onRequest({
   region: "europe-west9",
 }, verifyToken(async (req, res) => {
-  verifyGitHubUserAndFetchSSHKeysFunction.verifyGitHubUserAndFetchSSHKeys(req, res);
+  await verifyGitHubUserAndFetchSSHKeysFunction.verifyGitHubUserAndFetchSSHKeys(req, res);
 }));
 
 exports.warmer = onSchedule({
   region: "europe-west3",
   schedule: "* * * * *",
 }, async (event) => {
-  warmerFunction.warmer(event);
+  await warmerFunction.warmer(event);
 });
